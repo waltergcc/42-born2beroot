@@ -1,6 +1,9 @@
 # Born2beRoot
 This project aims to create a virtual machine running linux that meets security and performance standards.
 
+## Complete Guide
+There is a great guide created by parqualeross : https://github.com/pasqualerossi/Born2BeRoot-Guide
+
 ## Install and sudo setup and First Groups
 To ensure secure access, we installed sudo and created two groups: sudo and user42. We also edited the sudo configuration file using visudo and added the user to the sudo group. Additionally, we created the sudo.log file in /var/log/sudo.
 
@@ -117,6 +120,36 @@ sha1sum born2beroot.vdi
 cat > signature.txt
 ```
 
+## Checklist and commands during the evaluation
+- [ ] Check if sha1sum of vdi file is equal to signature.txt
+- [ ] Check linux release `lsb_release -a || cat /etc/os-release`
+- [ ] Check the partitions `lsblk`
+- [ ] Check if sudo in on `dpkg -l | grep sudo`
+- [ ] Check the hostname `hostnamectl`
+- [ ] Check the password policy `sudo chage -l username`
+- [ ] Check UFW `sudo ufw status numbered`
+- [ ] Check SSH `sudo systemctl status ssh`
+- [ ] Check sudo log `cd /var/log/sudo/` then `cat sudo.log`
+- [ ] Check if user is on sudo `getent group sudo`
+- [ ] Check if user is on user42 `getent group user42`
+- [ ] Run monitoring `cd /usr/local/bin` then `bash monitoring.sh`
+- [ ] Create a new user `sudo adduser username`
+- [ ] Check the username `cd /etc/passwd | grep username`
+- [ ] Create a new group `sudo groupadd evaluating`
+- [ ] Add the user to new group `sudo adduser username evaluating`
+- [ ] Add the user to sudo `sudo adduser username sudo`
+- [ ] Check the changes `getent group evaluating` and `getent group evaluating`
+- [ ] Change the hostname `sudo hostnamectl set-hostname newname` && `sudo nano /etc/hosts`
+- [ ] reboot, see and see the change `sudo reboot` then `hostnamectl`
+- [ ] Restore the original hostname `sudo hostnamectl set-hostname oldname` && `sudo nano /etc/hosts`
+- [ ] Add the 8080 port `sudo ufw allow 8080`
+- [ ] See the changes `sudo ufw status numbered`
+- [ ] Delete the port added `sudo ufw delete 1-9`
+- [ ] Check the ip address `sudo ip address`
+- [ ] Connect to new user `ssh new_user@hostip.0.0.0 -p 4242`
+- [ ] Try to connect to root (Must be fail) `ssh root@hostip.0.0.0 -p 4242` 
+- [ ] Change time to 1min `sudo crontab -u root -e `
+
 ## Questions
 
 ### What is a VM and why is it important?
@@ -143,5 +176,4 @@ SSH is a communication encryption technique between host and client. The communi
 ### What is Cron?
 Cron allows for scheduling of programs or scripts to run at a specific time.
 
-## Complete tutorial
-There is a great complete tutorial in this repo: https://github.com/pasqualerossi/Born2BeRoot-Guide
+## Grade: 100 / 100
