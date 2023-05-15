@@ -65,7 +65,26 @@ If get any error in the connection
 rm ~/.ssh/known_hosts
 change the Network config to attached to bridge adaptor - eno2
 ```
-
+## Close DHCP Port
+If we use the `sudo ss -tunlp` command we will find that it's open to port 68, which is referring to DHCP. To close this door, we need to change the machine IP address from dynamic to static. To solve this, we will make the following changes.
+```bash
+sudo ss -tunlp #check the open doors
+ip a #your current address
+sudo nano /etc/network/interfaces
+change line allow-hotplug enp0s3 to
+auto enp0s3
+change line iface enp0s3 inet dhcp to
+iface enp0s3 inet static
+Then add the follow lines
+address your_current_ip
+netmask 255.255.0.0
+gateway 10.11.254.254
+dns-nameservers 10.11.254.254
+sudo systemctl restart networking
+sudo systemctl status networking
+sudo reboot
+ss -tulnp
+```
 ## Password Policy
 We configured the password policy to meet the project's security requirements. We edited the common-password file to set the password retry limit to 3, password length to 10, and maximum repeated characters to 3. We set the password expiration policy using login.defs and chage commands. Lastly, we checked the password policy using chage.
 
