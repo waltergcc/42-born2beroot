@@ -4,6 +4,9 @@ This project aims to create a virtual machine running linux that meets security 
 ## Complete Guide
 There is a great guide created by parqualeross : https://github.com/pasqualerossi/Born2BeRoot-Guide
 
+## Debian Version
+In my project I used Debian 10.13. If you want to use the same version, follow the link: https://cdimage.debian.org/cdimage/archive/10.13.0/amd64/iso-cd/debian-10.13.0-amd64-netinst.iso
+
 ## Install and sudo setup and First Groups
 To ensure secure access, we installed sudo and created two groups: sudo and user42. We also edited the sudo configuration file using visudo and added the user to the sudo group. Additionally, we created the sudo.log file in /var/log/sudo.
 
