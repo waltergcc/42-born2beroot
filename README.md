@@ -5,7 +5,7 @@ This project aims to create a virtual machine running linux that meets security 
 There is a great guide created by parqualeross : https://github.com/pasqualerossi/Born2BeRoot-Guide
 
 ## Debian Version
-In my project I used Debian 10.13. If you want to use the same version, follow the link: https://cdimage.debian.org/cdimage/archive/10.13.0/amd64/iso-cd/debian-10.13.0-amd64-netinst.iso
+In my project I used Debian 10.13. If you want to use the same version, follow the download link: https://cdimage.debian.org/cdimage/archive/10.13.0/amd64/iso-cd/debian-10.13.0-amd64-netinst.iso
 
 ## Install and sudo setup and First Groups
 To ensure secure access, we installed sudo and created two groups: sudo and user42. We also edited the sudo configuration file using visudo and added the user to the sudo group. Additionally, we created the sudo.log file in /var/log/sudo.
@@ -93,7 +93,7 @@ We configured the password policy to meet the project's security requirements. W
 
 ```bash
 sudo nano /etc/pam.d/common-password
-password  requisite     pam_pwquality.so  retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
+password  requisite     pam_pwquality.so  retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
 sudo nano /etc/login.defs
 PASS_MAX_DAYS 30 > PASS_MIN_DAYS 2 > PASS_WARN_AGE 7
 sudo chage --maxdays 30 --mindays 2 --warndays 7 your_username
